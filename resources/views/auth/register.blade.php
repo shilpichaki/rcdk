@@ -78,7 +78,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name" class="col-form-label text-md-right" style="padding-left: 120px;">{{ __('Adress Details : ') }}</label>
+                            <label for="name" class="col-form-label text-md-right" style="padding-left: 160px;">{{ __('Adress Details : ') }}</label>
                         </div>
 
                         <div class="form-group row">
@@ -109,6 +109,10 @@
                                 @endif
                                 </textarea>
                             </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-form-label text-md-right" style="padding-left: 160px;">{{ __('Personal Details : ') }}</label>
                         </div>
 
                         <div class="form-group row">
