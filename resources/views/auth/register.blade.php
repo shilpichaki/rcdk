@@ -422,7 +422,7 @@
 
                             <label for="name" class="col-md-4 col-form-label radio"></label>
                             <div class="col-md-6">
-                                <input id="product2" type="radio" class="{{ $errors->has('product') ? ' is-invalid' : '' }}" name="product" value="false" required autofocus>RBI Bonds<br><br>
+                                <input id="product2" type="radio" class="{{ $errors->has('product') ? ' is-invalid' : '' }}" name="product" value="rbibonds" required autofocus>RBI Bonds<br><br>
 
                                 @if ($errors->has('product'))
                                     <span class="invalid-feedback" role="alert">
@@ -433,7 +433,7 @@
 
                             <label for="name" class="col-md-4 col-form-label radio-inline"></label>
                             <div class="col-md-6">
-                                <input id="product3" type="radio" class="{{ $errors->has('product') ? ' is-invalid' : '' }}" name="product" value="false" required autofocus>Life Insurance<br><br>
+                                <input id="product3" type="radio" class="{{ $errors->has('product') ? ' is-invalid' : '' }}" name="product" value="lifeinsurance" required autofocus>Life Insurance<br><br>
 
                                 @if ($errors->has('product'))
                                     <span class="invalid-feedback" role="alert">
@@ -444,7 +444,7 @@
 
                             <label for="name" class="col-md-4 col-form-label radio-inline"></label>
                             <div class="col-md-6">
-                                <input id="product4" type="radio" class="{{ $errors->has('product') ? ' is-invalid' : '' }}" name="product" value="false" required autofocus>General Insurance<br><br>
+                                <input id="product4" type="radio" class="{{ $errors->has('product') ? ' is-invalid' : '' }}" name="product" value="generalinsurance" required autofocus>General Insurance<br><br>
 
                                 @if ($errors->has('product'))
                                     <span class="invalid-feedback" role="alert">
@@ -455,7 +455,7 @@
 
                             <label for="name" class="col-md-4 col-form-label radio-inline"></label>
                             <div class="col-md-6">
-                                <input id="product5" type="radio" class="{{ $errors->has('product') ? ' is-invalid' : '' }}" name="product" value="false" required autofocus>Educational Product<br><br>
+                                <input id="product5" type="radio" class="{{ $errors->has('product') ? ' is-invalid' : '' }}" name="product" value="educationalproduct" required autofocus>Educational Product<br><br>
 
                                 @if ($errors->has('product'))
                                     <span class="invalid-feedback" role="alert">
@@ -466,7 +466,7 @@
 
                             <label for="name" class="col-md-4 col-form-label radio-inline"></label>
                             <div class="col-md-6">
-                                <input id="product6" type="radio" class="{{ $errors->has('product') ? ' is-invalid' : '' }}" name="product" value="false" required autofocus>Post Office Scheme
+                                <input id="product6" type="radio" class="{{ $errors->has('product') ? ' is-invalid' : '' }}" name="product" value="poscheme" required autofocus>Post Office Scheme
 
                                 @if ($errors->has('product'))
                                     <span class="invalid-feedback" role="alert">
@@ -609,7 +609,7 @@
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label radio" style="padding-left : 80px;">{{ __('Bank Account Type') }}</label>
                             <div class="col-md-6">
-                                <input id="accounttype" type="radio" class="{{ $errors->has('accounttype') ? ' is-invalid' : '' }}" name="accounttype" value="true" required autofocus>Savings
+                                <input id="accounttype" type="radio" class="{{ $errors->has('accounttype') ? ' is-invalid' : '' }}" name="accounttype" value="savings" required autofocus>Savings
 
                                 @if ($errors->has('accounttype'))
                                     <span class="invalid-feedback" role="alert">
@@ -620,7 +620,7 @@
 
                             <label for="name" class="col-md-4 col-form-label radio"></label>
                             <div class="col-md-6">
-                                <input id="accounttype1" type="radio" class="{{ $errors->has('accounttype') ? ' is-invalid' : '' }}" name="accounttype" value="false" required autofocus>Current<br><br>
+                                <input id="accounttype1" type="radio" class="{{ $errors->has('accounttype') ? ' is-invalid' : '' }}" name="accounttype" value="current" required autofocus>Current<br><br>
 
                                 @if ($errors->has('accounttype'))
                                     <span class="invalid-feedback" role="alert">
@@ -631,7 +631,7 @@
 
                             <label for="name" class="col-md-4 col-form-label radio"></label>
                             <div class="col-md-6">
-                                <input id="accounttype2" type="radio" class="{{ $errors->has('accounttype') ? ' is-invalid' : '' }}" name="accounttype" value="false" required autofocus>NRE<br><br>
+                                <input id="accounttype2" type="radio" class="{{ $errors->has('accounttype') ? ' is-invalid' : '' }}" name="accounttype" value="nre" required autofocus>NRE<br><br>
 
                                 @if ($errors->has('accounttype'))
                                     <span class="invalid-feedback" role="alert">
@@ -642,7 +642,7 @@
 
                             <label for="name" class="col-md-4 col-form-label radio-inline"></label>
                             <div class="col-md-6">
-                                <input id="accounttype3" type="radio" class="{{ $errors->has('accounttype') ? ' is-invalid' : '' }}" name="accounttype" value="false" required autofocus>NRO
+                                <input id="accounttype3" type="radio" class="{{ $errors->has('accounttype') ? ' is-invalid' : '' }}" name="accounttype" value="nro" required autofocus>NRO
 
                                 @if ($errors->has('accounttype'))
                                     <span class="invalid-feedback" role="alert">
