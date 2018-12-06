@@ -29,7 +29,7 @@
                             <label for="name" class="col-md-4 col-form-label radio" style="padding-left : 125px;">{{ __('Associate Type') }}</label>
 
                             <div class="col-md-6">
-                                    <input id="associatetype" type="radio" class="{{ $errors->has('associatetype') ? ' is-invalid' : '' }}" name="associatetype" value="true" required autofocus>Individual
+                                    <input id="associatetype" type="radio" class="{{ $errors->has('associatetype') ? ' is-invalid' : '' }}" name="associatetype" value="individual" required autofocus>Individual
 
                                     @if ($errors->has('associatetype'))
                                     <span class="invalid-feedback" role="alert">
@@ -39,7 +39,7 @@
                             </div>
                             <label for="name" class="col-md-4 col-form-label radio-inline"></label>
                             <div class="col-md-6">
-                                <input id="associatetype1" type="radio" class="{{ $errors->has('associatetype') ? ' is-invalid' : '' }}" name="associatetype" value="false" required autofocus>Company
+                                <input id="associatetype1" type="radio" class="{{ $errors->has('associatetype') ? ' is-invalid' : '' }}" name="associatetype" value="company" required autofocus>Company
 
                                 @if ($errors->has('associatetype'))
                                     <span class="invalid-feedback" role="alert">
@@ -254,7 +254,7 @@
                             <label for="name" class="col-md-4 col-form-label radio" style="padding-left : 162px;">{{ __('AMFI No.') }}</label>
 
                             <div class="col-md-6">
-                                <input id="amfino" type="radio" class="{{ $errors->has('amfino') ? ' is-invalid' : '' }}" name="amfino" value="true" required autofocus>Yes
+                                <input id="amfino" type="radio" class="{{ $errors->has('amfino') ? ' is-invalid' : '' }}" name="amfino" value="yes" required autofocus>Yes
 
                                 @if ($errors->has('amfino'))
                                     <span class="invalid-feedback" role="alert">
@@ -264,7 +264,7 @@
                             </div>
                             <label for="name" class="col-md-4 col-form-label radio-inline"></label>
                             <div class="col-md-6">
-                                <input id="amfino1" type="radio" class="{{ $errors->has('amfino') ? ' is-invalid' : '' }}" name="amfino" value="false" required autofocus>No
+                                <input id="amfino1" type="radio" class="{{ $errors->has('amfino') ? ' is-invalid' : '' }}" name="amfino" value="no" required autofocus>No
 
                                 @if ($errors->has('amfino1'))
                                     <span class="invalid-feedback" role="alert">
@@ -292,7 +292,7 @@
                             <label for="name" class="col-md-4 col-form-label radio" style="padding-left : 162px;">{{ __('IRDA No.') }}</label>
 
                             <div class="col-md-6">
-                                <input id="irdano" type="radio" class="{{ $errors->has('irdano') ? ' is-invalid' : '' }}" name="irdano" value="true" required autofocus>Yes
+                                <input id="irdano" type="radio" class="{{ $errors->has('irdano') ? ' is-invalid' : '' }}" name="irdano" value="yes" required autofocus>Yes
 
                                 @if ($errors->has('irdano'))
                                     <span class="invalid-feedback" role="alert">
@@ -302,7 +302,7 @@
                             </div>
                             <label for="name" class="col-md-4 col-form-label radio-inline"></label>
                             <div class="col-md-6">
-                                <input id="irdano1" type="radio" class="{{ $errors->has('irdano') ? ' is-invalid' : '' }}" name="irdano" value="false" required autofocus>No
+                                <input id="irdano1" type="radio" class="{{ $errors->has('irdano') ? ' is-invalid' : '' }}" name="irdano" value="no" required autofocus>No
 
                                 @if ($errors->has('irdano'))
                                     <span class="invalid-feedback" role="alert">
@@ -329,7 +329,7 @@
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label radio" style="padding-left : 150px;">{{ __('Occupation') }}</label>
                             <div class="col-md-6">
-                                <input id="occupation" type="radio" class="{{ $errors->has('occupation') ? ' is-invalid' : '' }}" name="occupation" value="true" required autofocus>Service
+                                <input id="occupation" type="radio" class="{{ $errors->has('occupation') ? ' is-invalid' : '' }}" name="occupation" value="service" required autofocus>Service
 
                                 @if ($errors->has('occupation'))
                                     <span class="invalid-feedback" role="alert">
@@ -340,7 +340,7 @@
 
                             <label for="name" class="col-md-4 col-form-label radio"></label>
                             <div class="col-md-6">
-                                <input id="occupation1" type="radio" class="{{ $errors->has('occupation') ? ' is-invalid' : '' }}" name="occupation" value="false" required autofocus>Business<br><br>
+                                <input id="occupation1" type="radio" class="{{ $errors->has('occupation') ? ' is-invalid' : '' }}" name="occupation" value="business" required autofocus>Business<br><br>
 
                                 @if ($errors->has('occupation'))
                                     <span class="invalid-feedback" role="alert">
@@ -351,7 +351,7 @@
 
                             <label for="name" class="col-md-4 col-form-label radio"></label>
                             <div class="col-md-6">
-                                <input id="occupation2" type="radio" class="{{ $errors->has('occupation') ? ' is-invalid' : '' }}" name="occupation" value="false" required autofocus>Retired<br><br>
+                                <input id="occupation2" type="radio" class="{{ $errors->has('occupation') ? ' is-invalid' : '' }}" name="occupation" value="retired" required autofocus>Retired<br><br>
 
                                 @if ($errors->has('occupation'))
                                     <span class="invalid-feedback" role="alert">
@@ -362,7 +362,7 @@
 
                             <label for="name" class="col-md-4 col-form-label radio-inline"></label>
                             <div class="col-md-6">
-                                <input id="occupation3" type="radio" class="{{ $errors->has('occupation') ? ' is-invalid' : '' }}" name="occupation" value="false" required autofocus>Housewife<br><br>
+                                <input id="occupation3" type="radio" class="{{ $errors->has('occupation') ? ' is-invalid' : '' }}" name="occupation" value="housewife" required autofocus>Housewife<br><br>
 
                                 @if ($errors->has('occupation'))
                                     <span class="invalid-feedback" role="alert">
@@ -373,7 +373,7 @@
 
                             <label for="name" class="col-md-4 col-form-label radio-inline"></label>
                             <div class="col-md-6">
-                                <input id="occupation4" type="radio" class="{{ $errors->has('occupation') ? ' is-invalid' : '' }}" name="occupation" value="false" required autofocus>Other
+                                <input id="occupation4" type="radio" class="{{ $errors->has('occupation') ? ' is-invalid' : '' }}" name="occupation" value="other" required autofocus>Other
 
                                 @if ($errors->has('occupation'))
                                     <span class="invalid-feedback" role="alert">
@@ -400,7 +400,7 @@
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label radio">{{ __('Click on the Product/s you have experience in selling') }}</label>
                             <div class="col-md-6">
-                                <input id="product" type="radio" class="{{ $errors->has('product') ? ' is-invalid' : '' }}" name="product" value="true" required autofocus>Fixed Deposit
+                                <input id="product" type="radio" class="{{ $errors->has('product') ? ' is-invalid' : '' }}" name="product" value="fixeddeposit" required autofocus>Fixed Deposit
 
                                 @if ($errors->has('product'))
                                     <span class="invalid-feedback" role="alert">
@@ -411,7 +411,7 @@
 
                             <label for="name" class="col-md-4 col-form-label radio"></label>
                             <div class="col-md-6">
-                                <input id="product1" type="radio" class="{{ $errors->has('product') ? ' is-invalid' : '' }}" name="product" value="false" required autofocus>Mutual Fund<br><br>
+                                <input id="product1" type="radio" class="{{ $errors->has('product') ? ' is-invalid' : '' }}" name="product" value="mutualfund" required autofocus>Mutual Fund<br><br>
 
                                 @if ($errors->has('product'))
                                     <span class="invalid-feedback" role="alert">

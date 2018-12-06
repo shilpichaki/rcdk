@@ -49,7 +49,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:180'],
+            'sub_broker_id' => ['required', 'integer'],
+            'sub_broker_name' => ['required', 'string', 'max:180'],
+            'sub_broker_type' => ['required', 'in:individual,company'],
             'email' => ['required', 'string', 'email', 'max:180', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
