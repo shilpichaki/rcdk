@@ -162,7 +162,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Home No') }}</label>
 
                             <div class="col-md-6">
-                                <input id="homephno" type="text" class="form-control{{ $errors->has('homephno') ? ' is-invalid' : '' }}" name="homephno" value="{{ old('homephno') }}" required autofocus>
+                                <input id="homephno" type="text" class="form-control{{ $errors->has('homephno') ? ' is-invalid' : '' }}" name="homephno" value="{{ old('homephno') }}" autofocus>
 
                                 @if ($errors->has('homephno'))
                                     <span class="invalid-feedback" role="alert">
@@ -190,7 +190,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Fax No') }}</label>
 
                             <div class="col-md-6">
-                                <input id="faxno" type="text" class="form-control{{ $errors->has('faxno') ? ' is-invalid' : '' }}" name="faxno" value="{{ old('faxno') }}" required autofocus>
+                                <input id="faxno" type="text" class="form-control{{ $errors->has('faxno') ? ' is-invalid' : '' }}" name="faxno" value="{{ old('faxno') }}"  autofocus>
 
                                 @if ($errors->has('faxno'))
                                     <span class="invalid-feedback" role="alert">
@@ -240,7 +240,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Professional Qualification') }}</label>
 
                             <div class="col-md-6">
-                                <input id="proffqualification" type="text" class="form-control{{ $errors->has('proffqualification') ? ' is-invalid' : '' }}" name="proffqualification" value="{{ old('proffqualification') }}" required autofocus>
+                                <input id="proffqualification" type="text" class="form-control{{ $errors->has('proffqualification') ? ' is-invalid' : '' }}" name="proffqualification" value="{{ old('proffqualification') }}"  autofocus>
 
                                 @if ($errors->has('proffqualification'))
                                     <span class="invalid-feedback" role="alert">
@@ -278,7 +278,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('If Yes Then Please Give ARN No.(Attach Photocopy)') }}</label>
 
                             <div class="col-md-6">
-                                <input id="arnattachment" type="file" class="{{ $errors->has('arnattachment') ? ' is-invalid' : '' }}" name="arnattachment" value="{{ old('arnattachment') }}" required autofocus>
+                                <input id="arnattachment" type="file" class="{{ $errors->has('arnattachment') ? ' is-invalid' : '' }}" name="arnattachment" value="{{ old('arnattachment') }}"  autofocus>
 
                                 @if ($errors->has('arnattachment'))
                                     <span class="invalid-feedback" role="alert">
@@ -316,7 +316,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Any Other Qualification') }}</label>
 
                             <div class="col-md-6">
-                                <input id="otherqualification" type="text" class="form-control{{ $errors->has('otherqualification') ? ' is-invalid' : '' }}" name="otherqualification" value="{{ old('otherqualification') }}" required autofocus>
+                                <input id="otherqualification" type="text" class="form-control{{ $errors->has('otherqualification') ? ' is-invalid' : '' }}" name="otherqualification" value="{{ old('otherqualification') }}" autofocus>
 
                                 @if ($errors->has('otherqualification'))
                                     <span class="invalid-feedback" role="alert">

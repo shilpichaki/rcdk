@@ -15,10 +15,13 @@ class CreateAddressMasterTable extends Migration
     {
         Schema::create('address_master', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sub_broker_id')->references('id')->on('sub_broker_master');
+            $table->integer('sub_broker_id');
             $table->string('present_address','255');
             $table->string('permanent_address', '255');
             $table->timestamps();
+
+            $table->foreign('sub_broker_id')->references('id')->on('sub_broker_master');
+
         });
     }
 

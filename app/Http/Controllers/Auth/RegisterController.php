@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\FileUpload;
 use App\SubBroker;
 use App\Address;
 use App\BankMaster;
@@ -9,10 +10,12 @@ use App\Introducer;
 use App\Nominee;
 use App\Http\Controllers\Controller;
 use App\Util;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Validator;
 
 
 class RegisterController extends Controller
@@ -29,6 +32,7 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+
 
     /**
      * Where to redirect users after registration.
@@ -48,87 +52,164 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Show the form for creating a new resource.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return \Illuminate\Http\Response
      */
-    protected function validator(array $data)
+    public function create(Request $request)
     {
-        return Validator::make($data, [
-            'sub_broker_id' => 'required|integer',
-            'sub_broker_name' => 'required|string|max:180',
-            'sub_broker_type' => 'required|in:individual,company',
-            'sub_broker_introducer_name' => 'string|max:100|nullable',
-            'sub_broker_introducer_code' => 'string|max:80|nullable',
-            'sub_broker_present_address' => 'required|string|max:180',
-            'sub_broker_permanent_address' => 'required|string|max:180',
-            'sub_broker_dob' => 'required|date',
-            'sub_broker_age' =>'required|integer',
-            'sub_broker_mob_no' => 'required|integer|max:10',
-            'sub_broker_home_no' => 'nullable|integer',
-            'sub_broker_fax_no' => 'nullable|integer',
-            'sub_broker_email' => 'required|string|email|max:180|unique:sub_broker_master',
-            'sub_broker_password' => 'required|string|min:8|confirmed',
-            'sub_broker_edu_quali' => 'required|string',
-            'sub_broker_proff_quali' => 'nullable|string',
-            'sub_broker_amfi' => 'required|in:yes,no',
-            'sub_broker_amfi_file' => 'image|mime:jpeg,png,jpg,gif,svg|max:2048',
-            'sub_broker_irda' => 'required|in:yes,no',
-            'sub_broker_other_quali' => 'nullable|string',
-            'sub_broker_occupation' => 'required|in:service,business,housewife,retired,other',
-            'sub_broker_experience' => 'required|integer',
-            'sub_broker_product_exp' => 'required|in:fixeddeposit,mutualfund,rbibonds,lifeinsurance,generalinsurance,educationalproduct,poscheme',
-            'sub_broker_pan_no' => 'required|string|unique:sub_broker_master',
-            'sub_broker_aadhar' => 'required|integer|max:12',
-            'sub_broker_bank name' => 'required|string',
-            'sub_broker_bank_branch_name' => 'required|string',
-            'sub_broker_account_no' => 'required|string',
-            'sub_broker_branch_code' => 'required|string',
-            'sub_broker_ifsc' => 'required|string',
-            'sub_broker_micr' => 'required|string',
-            'sub_broker_rtgs' => 'required|string',
-            'sub_broker_account_type' => 'required|in:savings,current,nre,nro',
-            'sub_broker_nominee_name' => 'required|string',
-            'sub_broker_nominee_relation' => 'required|string',
-        ]);
+        return view('auth.register');
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $input)
+    public function store(Request $request)
     {
-        DB::beginTransaction();
+        $subbroker = $request->isMethod('put') ? SubBroker::findOrFail($request->id) : new SubBroker;
 
-        try
-        {
-            $subBroker = new SubBroker;
-            $bankDetails = new BankMaster;
-            $nominee = new Nominee;
-            $address = new Address;
-            $introducer = new Introducer;
-
-            $subBroker_input = [
-                'name' => $input['name'],
-                'identity' => $input['associatetype'],
-                'introducer_detail_id' => $input['introducer_detail_id'],
-                'dob' => Util::mysqlDateTimeConverter($input["dob"]),
-                'age' => Util::mysqlDateTimeConverter($input["age"]),
-                'phone_no' => $input["mobno"],
-                'email' => $input["email"],
-                'home_no' => $input["homephno"],
-                'fax_no' => $input["faxno"],
-                'education' => $input[""]
-            ];
-        }
-        catch (\Exception $exception)
+        if($request->isMethod('put'))
         {
 
+            $validator = Validator::make($request->all(),
+                [
+                    'id' => 'required|integer',
+                    'name' => 'required|string|max:180',
+                    'associatetype' => 'required|in:individual,company',
+                    'introducername' => 'string|max:100|nullable',
+                    'introducercode' => 'string|max:80|nullable',
+                    'pradress' => 'required|string|max:180',
+                    'permadress' => 'required|string|max:180',
+                    'dob' => 'required|date',
+                    'age' =>'required|integer',
+                    'mobno' => 'required|max:10',
+                    'homephno' => 'nullable',
+                    'faxno' => 'nullable',
+                    'email' => 'required|string|email|max:180|unique:sub_broker_master',
+                    'password' => 'required|string|min:8|confirmed',
+                    'qualification' => 'required|string',
+                    'proffqualification' => 'nullable|string',
+                    'amfino' => 'required|in:yes,no',
+                    'arnattachment' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'irdano' => 'required|in:yes,no',
+                    'otherqualification' => 'nullable|string',
+                    'occupation' => 'required|in:service,business,housewife,retired,other',
+                    'experience' => 'required|integer',
+                    'product' => 'required|in:fixeddeposit,mutualfund,rbibonds,lifeinsurance,generalinsurance,educationalproduct,poscheme',
+                    'pan_no' => 'required|string|unique:sub_broker_master',
+                    'aadharno' => 'required|max:12',
+                    'bankname' => 'required|string',
+                    'bankbranchname' => 'required|string',
+                    'accountno' => 'required|string',
+                    'branchcode' => 'required|string',
+                    'ifsc' => 'required|string',
+                    'micr' => 'required|string',
+                    'rtgs' => 'required|string',
+                    'accounttype' => 'required|in:savings,current,nre,nro',
+                    'nomineename' => 'required|string',
+                    'nomineerelation' => 'required|string',
+                ]
+            );
+
+            if ($validator->fails()) {
+                return redirect('auth.register')
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+        }
+        else
+        {
+            $validator = Validator::make($request->all(),
+                [
+                    'id' => 'required|integer',
+                    'name' => 'required|string|max:180',
+                    'associatetype' => 'required|in:individual,company',
+                    'introducername' => 'string|max:100|nullable',
+                    'introducercode' => 'string|max:80|nullable',
+                    'pradress' => 'required|string|max:180',
+                    'permadress' => 'required|string|max:180',
+                    'dob' => 'required|date',
+                    'age' =>'required|integer',
+                    'mobno' => 'required|max:10',
+                    'homephno' => 'nullable',
+                    'faxno' => 'nullable',
+                    'email' => 'required|string|email|max:180|unique:sub_broker_master',
+                    'password' => 'required|string|min:8|confirmed',
+                    'qualification' => 'required|string',
+                    'proffqualification' => 'nullable|string',
+                    'amfino' => 'required|in:yes,no',
+                    'arnattachment' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'irdano' => 'required|in:yes,no',
+                    'otherqualification' => 'nullable|string',
+                    'occupation' => 'required|in:service,business,housewife,retired,other',
+                    'experience' => 'required|integer',
+                    'product' => 'required|in:fixeddeposit,mutualfund,rbibonds,lifeinsurance,generalinsurance,educationalproduct,poscheme',
+                    'pan_no' => 'required|string|unique:sub_broker_master',
+                    'aadharno' => 'required|max:12',
+                    'bankname' => 'required|string',
+                    'bankbranchname' => 'required|string',
+                    'accountno' => 'required|string',
+                    'branchcode' => 'required|string',
+                    'ifsc' => 'required|string',
+                    'micr' => 'required|string',
+                    'rtgs' => 'required|string',
+                    'accounttype' => 'required|in:savings,current,nre,nro',
+                    'nomineename' => 'required|string',
+                    'nomineerelation' => 'required|string',
+                ]
+            );
+
+            if ($validator->fails()) {
+                return redirect('auth.register')
+                    ->withErrors($validator)
+                    ->withInput();
+            }
         }
 
+        $subBroker = new SubBroker;
+        $bankDetails = new BankMaster;
+        $nominee = new Nominee;
+        $address = new Address;
+        $introducer = new Introducer;
+
+        $introducer->introducer_name = $request->input('introducername');
+        $introducer->introducer_code = $request->input('introducercode');
+
+        $introducer->save();
+
+        dd($introducer);
+        $address_input = [
+            'present_address' => $input["pradress"],
+            'permanent_address' => $input["permadress"],
+        ];
+
+        $address = Address::create($address_input);
+
+        $brokercompany->b_company_id = $request->input('company_id');
+        $brokercompany->b_company_name = $request->input('company_name');
+        $brokercompany->b_avg_feedback_day = $request->input('feedback_day');
+        $brokercompany->b_company_email = $request->input('company_email');
+        $brokercompany->b_company_address = $request->input('company_address');
+        $brokercompany->b_company_pin = $request->input('company_pin');
+        $brokercompany->b_company_city = $request->input('company_city');
+        $brokercompany->b_company_state = $request->input('company_state');
+        $brokercompany->b_company_country = $request->input('company_country');
+        $brokercompany->b_company_GSTIN = $request->input('company_gstinno');
+
+        if($brokercompany->save())
+        {
+            return redirect()->route('brokercompany.index');
+        }
+    }
+
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        event(new Registered($subbroker = $this->create($request->all())));
+        return $this->registered($request, $subbroker)
+            ?: redirect($this->redirectPath());
+    }
+
+    public function showRegistrationForm()
+    {
+        return view("auth.register");
     }
 }

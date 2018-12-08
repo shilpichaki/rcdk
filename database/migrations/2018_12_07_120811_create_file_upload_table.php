@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIntroducerMasterTable extends Migration
+class CreateFileUploadTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateIntroducerMasterTable extends Migration
      */
     public function up()
     {
-        Schema::create('introducer_master', function (Blueprint $table) {
+        Schema::create('file_upload', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sub_broker_id');
-            $table->string('introducer_name', '60');
-            $table->string('introducer_code');
+            $table->integer('sub_broker_id')->unsigned();
+            $table->string('filenames');
             $table->timestamps();
 
             $table->foreign('sub_broker_id')->references('id')->on('sub_broker_master');
@@ -31,6 +30,6 @@ class CreateIntroducerMasterTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('introducer_master');
+        Schema::dropIfExists('file_upload');
     }
 }
