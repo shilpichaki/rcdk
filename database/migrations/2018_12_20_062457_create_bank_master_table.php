@@ -15,7 +15,7 @@ class CreateBankMasterTable extends Migration
     {
         Schema::create('bank_master', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sub_broker_id');
+            $table->integer('sub_broker_id')->unsigned();
             $table->string('name', '50');
             $table->string('branch_name', '60');
             $table->string('account_no', '50');

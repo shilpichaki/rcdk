@@ -2,18 +2,47 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Request;
 
-class SubBroker extends Model
+class SubBroker extends Authenticatable
 {
+    use Notifiable;
+
     protected $table = "sub_broker_master";
     public $primaryKey = "id";
     public $timestamps = true;
     protected $fillable = [
-        'name', 'identity', 'introducer_id', 'address_id', 'dob', 'age', 'phone_no', 'email', 'home_no', 'fax_no', 'education', 'proff_qualification', 'amfi_no', 'irda_no', 'other_qualification', 'occupation', 'exp_year', 'product', 'pan_no', 'aadhar_no', 'bank_id', 'nominee_id',
+        'name', 'identity', 'dob', 'age', 'phone_no', 'email', 'home_no', 'fax_no', 'password', 'education', 'proff_qualification', 'amfi_no', 'irda_no', 'other_qualification', 'occupation', 'exp_year',  'pan_no', 'aadhar_no',
     ];
     protected $hidden = [
         'password'
     ];
+
+    public function bank()
+    {
+        return $this->hasOne('App\BankMaster', 'sub_broker_id');
+    }
+
+    public function address()
+    {
+        return $this->hasOne('App\Address', 'sub_broker_id');
+    }
+
+    public function introducer()
+    {
+        return $this->hasOne('App\Introducer', 'sub_broker_id');
+    }
+
+    public function nominee()
+    {
+        return $this->hasOne('App\Nominee', 'sub_broker_id');
+    }
+
+    public function fileupload()
+    {
+        return $this->hasOne('App\FileUpload', 'sub_broker_id');
+    }
 
 }

@@ -10,12 +10,12 @@ class Introducer extends Model
     public $primaryKey = "id";
     public $timestamps = "true";
     protected $fillable = [
-        'introducer_name', 'introducer_code',
+        'sub_broker_id','introducer_name', 'introducer_code',
     ];
 
     //sub broker details
-    public function sub_broker_details()
+    public function sub_broker()
     {
-        return $this->belongsTo('App\SubBroker', 'sub_broker_id','id');
+        return $this->belongsTo('App\SubBroker');
     }
 }

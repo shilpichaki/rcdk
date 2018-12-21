@@ -15,7 +15,7 @@ class CreateIntroducerMasterTable extends Migration
     {
         Schema::create('introducer_master', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sub_broker_id');
+            $table->integer('sub_broker_id')->unsigned();
             $table->string('introducer_name', '60');
             $table->string('introducer_code');
             $table->timestamps();

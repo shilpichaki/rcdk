@@ -10,12 +10,12 @@ class BankMaster extends Model
     public $primaryKey = "id";
     public $timestamps = true;
     protected $fillable = [
-        'name', 'branch_name', 'account_no', 'branch_code', 'ifsc', 'micr', 'branch_rtgs_no', 'acc_type',
+        'sub_broker_id','bank_name', 'branch_name', 'account_no', 'branch_code', 'ifsc', 'micr', 'branch_rtgs_no', 'acc_type',
     ];
 
     //sub broker details
-    public function sub_broker_details()
+    public function sub_broker()
     {
-        return $this->belongsTo('App\SubBroker', 'sub_broker_id','id');
+        return $this->belongsTo('App\SubBroker');
     }
 }

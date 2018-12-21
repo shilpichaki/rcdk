@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAddressMasterTable extends Migration
+class CreateSubBrokerStatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,10 @@ class CreateAddressMasterTable extends Migration
      */
     public function up()
     {
-        Schema::create('address_master', function (Blueprint $table) {
+        Schema::create('sub_broker_states', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sub_broker_id');
-            $table->string('present_address','255');
-            $table->string('permanent_address', '255');
+            $table->string('state_name');
             $table->timestamps();
-
-            $table->foreign('sub_broker_id')->references('id')->on('sub_broker_master');
-
         });
     }
 
@@ -32,6 +27,6 @@ class CreateAddressMasterTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('address_master');
+        Schema::dropIfExists('sub_broker_states');
     }
 }

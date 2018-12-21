@@ -4,19 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FileUpload extends Model
+class Product extends Model
 {
-    protected $table = "file_upload";
+    protected $table = "product";
     public $primaryKey = "id";
-    public $timestamps = "true";
+    public $timestamps = true;
     protected $fillable = [
-        'sub_broker_id','amfi_file', 'photo', 'signature',
+        'sub_broker_id','product_name'
     ];
 
-    //Sub Broker Details
+    //sub broker details
     public function sub_broker()
     {
         return $this->belongsTo('App\SubBroker');
     }
-
 }

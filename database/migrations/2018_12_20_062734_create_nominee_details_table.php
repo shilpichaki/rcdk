@@ -15,7 +15,7 @@ class CreateNomineeDetailsTable extends Migration
     {
         Schema::create('nominee_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sub_broker_id');
+            $table->integer('sub_broker_id')->unsigned();
             $table->string('nominee_name', '80');
             $table->string('nominee_relationship', '40');
             $table->timestamps();
