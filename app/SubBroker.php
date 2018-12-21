@@ -45,4 +45,15 @@ class SubBroker extends Authenticatable
         return $this->hasOne('App\FileUpload', 'sub_broker_id');
     }
 
+    public function product()
+    {
+        return $this->hasone('App\Product', 'sub_broker_id');
+    }
+
+    public function userActivation()
+    {
+        return $this->hasone('App\UserActivation', 'sub_broker_id');
+    }
+
+
 }

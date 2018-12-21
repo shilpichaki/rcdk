@@ -9,6 +9,8 @@ use App\Address;
 use App\BankMaster;
 use App\Introducer;
 use App\Nominee;
+use App\UserActivation;
+use App\Mail\VerifyMail;
 use App\Http\Controllers\Controller;
 use App\Util;
 use Dotenv\Exception\ValidationException;
@@ -163,6 +165,34 @@ class RegisterController extends Controller
             'present_state_id' => $input['presentstate'],
         ]);
 
+        $string_name = $input['name'];
+        $string_town = $input['presenttown'];
+        $rand_no = mt_rand(100000, 999999);
+        $string_const = "RCDK/" ;
+
+        $RCDK = array_filter(explode(" ", $string_const));
+
+        $username = array_filter(explode(" ", $string_name));
+        $username = array_slice($username, 0, 3); //return only first three part
+
+        $town = array_filter(explode(" ", $string_town));
+        $town = array_slice($town, 0, 3);//return only first three part
+
+        $part1 = (!empty($RCDK[0]))?substr($RCDK[0],0 ,5):"";
+        $part2 = (!empty($username[0]))?substr($username[0], 0,3):"";
+        $part3 = (!empty($town[0]))?substr($town[0], 0,3):"";
+        //$part2 = (!empty($username[1]))?substr($username[1], 0,5):"";
+        $part4 = ($rand_no)?rand(0, $rand_no):"";
+
+        $username = $part1."/".$part2."/".$part3."/".$part4;
+
+        UserActivation::create([
+            'sub_broker_id' => $subbroker->id,
+            'user_id' => $username,
+            'token' => sha1(time()),
+        ]);
+        \Mail::to($subbroker->email)->send(new VerifyMail($subbroker));
+
         Introducer::create([
             'sub_broker_id' => $subbroker->id,
             'introducer_name' => $input['introducername'],
@@ -176,6 +206,36 @@ class RegisterController extends Controller
 
         DB::commit();
     }
+    // public function generate_username(array $input) {
+
+
+    //     $string_name = $input['name'];
+    //     $string_town = $input['presenttown'];
+    //     $rand_no = mt_rand(100000, 999999);
+    //     $string_const = "RCDK/" ;
+
+    //     $RCDK = array_filter(explode(" ", $string_const));
+
+    //     $username = array_filter(explode(" ", $string_name));
+    //     $username = array_slice($username, 0, 3); //return only first three part
+
+    //     $town = array_filter(explode(" ", $string_town));
+    //     $town = array_slice($town, 0, 3);//return only first three part
+
+    //     $part1 = (!empty($RCDK[0]))?substr($RCDK[0],0 ,5):"";
+    //     $part2 = (!empty($username[0]))?substr($username[0], 0,3):"";
+    //     $part3 = (!empty($town[0]))?substr($town[0], 0,3):"";
+    //     //$part2 = (!empty($username[1]))?substr($username[1], 0,5):"";
+    //     $part4 = ($rand_no)?rand(0, $rand_no):"";
+
+    //     $username = $part1."/".$part2."/".$part3."/".$part4;
+
+    //     //return $username;
+    //     $subbroker = new SubBroker;
+    //     $subbroker->user_id = $username;
+    //     $subbroker->save();
+
+    // }
 
     public function register(Request $request)
     {
@@ -191,32 +251,6 @@ class RegisterController extends Controller
         return view("auth.register", compact('states'));
     }
 
-    public function generate_username(array $input) {
-
-
-        $string_name = $input['name'];
-        $string_town = $input['presenttown'];
-        $rand_no = mt_rand(100000, 999999);
-        $string_const = "RCDK/" ;
-
-        $RCDK = array_filter(explode(" ", strtolower($string_const)));
-
-        $username = array_filter(explode(" ", strtolower($string_name)));
-        $username = array_slice($username, 0, 3); //return only first three part
-
-        $town = array_filter(explode(" ", strtolower($string_town)));
-        $town = array_slice($town, 0, 3);//return only first three part
-
-        $part1 = (!empty($RCDK[0]))?substr($RCDK[0],0 ,5):"";
-        $part2 = (!empty($username[0]))?substr($username[0], 0,3):"";
-        $part3 = (!empty($town[0]))?substr($town[0], 0,3):"";
-        //$part2 = (!empty($username[1]))?substr($username[1], 0,5):"";
-        $part4 = ($rand_no)?rand(0, $rand_no):"";
-
-        $username = $part1.$part2."/".$part3."/".$part4;
-
-        return $username;
-
-    }
+    
 }
 
