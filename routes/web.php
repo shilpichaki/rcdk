@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register','Auth\RegisterController@register');
+Route::get('/subbroker/verify/{token}', 'Auth\RegisterController@verifyUser');
+
 
 Route::post('login', 'Auth\LoginController@login');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

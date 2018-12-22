@@ -78,7 +78,7 @@ class RegisterController extends Controller
             'qualification' => 'required|string',
             'proffqualification' => 'nullable|string',
             'amfino' => 'required|in:yes,no',
-            //'amfi_file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'filename' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'irdano' => 'required|in:yes,no',
             'otherqualification' => 'nullable|string',
             'occupation' => 'required|in:service,business,housewife,retired,other',
@@ -96,6 +96,8 @@ class RegisterController extends Controller
             'accounttype' => 'required|in:savings,current,nre,nro',
             'nomineename' => 'required|string',
             'nomineerelation' => 'required|string',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'sign' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
     }
 
@@ -115,7 +117,7 @@ class RegisterController extends Controller
         DB::beginTransaction();
 
         $subbroker = SubBroker::create([
-            'name' => $input['name'],
+            'name' => strtoupper($input['name']),
             'identity' => $input['associatetype'] == 'yes' ? 1 : 0,
             'dob' => Util::mysqlDateTimeConverter($input['dob']),
             'age' => $input['age'],
@@ -160,13 +162,13 @@ class RegisterController extends Controller
             'permanent_pin' => $input['permpin'],
             'permanent_state_id' => $input['permstate'],
             'present_street' => $input['presentstreet'],
-            'present_town' => $input['presenttown'],
+            'present_town' => strtoupper($input['presenttown']),
             'present_pin' => $input['presentpin'],
             'present_state_id' => $input['presentstate'],
         ]);
 
-        $string_name = $input['name'];
-        $string_town = $input['presenttown'];
+        $string_name = strtoupper($input['name']);
+        $string_town = strtoupper($input['presenttown']);
         $rand_no = mt_rand(100000, 999999);
         $string_const = "RCDK/" ;
 
@@ -189,7 +191,7 @@ class RegisterController extends Controller
         UserActivation::create([
             'sub_broker_id' => $subbroker->id,
             'user_id' => $username,
-            'token' => sha1(time()),
+            'token' => str_random('30'),
         ]);
         \Mail::to($subbroker->email)->send(new VerifyMail($subbroker));
 
@@ -202,6 +204,29 @@ class RegisterController extends Controller
         Product::create([
             'sub_broker_id' => $subbroker->id,
             'product_name' => $input['product'],
+        ]);
+//        if($input->hasFile('filename'))
+//        {
+//            $imageName = $input->filename->getClientOriginalName();
+//            $input->filename->move(public_path('upload'),$imageName);
+//        }
+        $title = $input['filename'];
+        $imageName = $title->getClientOriginalName();
+        $title->move(public_path('upload'), $imageName);
+
+        $phototitle = $input['photo'];
+        $nameOfPhoto = $phototitle->getClientOriginalName();
+        $phototitle->move(public_path('upload'), $nameOfPhoto);
+
+        $signtitle = $input['sign'];
+        $nameOfSign = $signtitle->getClientOriginalName();
+        $signtitle->move(public_path('upload'), $nameOfSign);
+
+        FileUpload::create([
+            'sub_broker_id' => $subbroker->id,
+            'amfi_file' => $title,
+            'photo' => $nameOfPhoto,
+            'sign' => $nameOfSign,
         ]);
 
         DB::commit();
@@ -236,6 +261,24 @@ class RegisterController extends Controller
     //     $subbroker->save();
 
     // }
+
+//    public function verifyUser($token)
+//    {
+//        $verifyUser = UserActivation::where('token', $token)->first();
+//        if(isset($verifyUser) ){
+//            $user = $verifyUser->subbroker;
+//            if(!$user->verified) {
+//                $verifyUser->subbroker->verified = 1;
+//                $verifyUser->subbroker->save();
+//                $status = "Your e-mail is verified. You can now login.";
+//            } else {
+//                $status = "Your e-mail is already verified. You can now login.";
+//            }
+//        } else {
+//            return redirect('/login')->with('warning', "Sorry your email cannot be identified.");
+//        }
+//        return redirect('/login')->with('status', $status);
+    //}
 
     public function register(Request $request)
     {

@@ -42,7 +42,7 @@ class SubBroker extends Authenticatable
 
     public function fileupload()
     {
-        return $this->hasOne('App\FileUpload', 'sub_broker_id');
+        return $this->hasMany('App\FileUpload', 'sub_broker_id');
     }
 
     public function product()

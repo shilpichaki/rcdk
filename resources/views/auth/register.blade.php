@@ -381,19 +381,6 @@
                             </div>
                         </div>
 
-                        {{--<div class="form-group row">--}}
-                            {{--<label for="name" class="col-md-4 col-form-label text-md-right">{{ __('If Yes Then Please Give ARN No.(Attach Photocopy)') }}</label>--}}
-
-                            {{--<div class="col-md-6">--}}
-                                {{--<input id="amfi_file" type="file" class="{{ $errors->has('amfi_file') ? ' is-invalid' : '' }}" name="amfi_file" value="{{ old('amfi_file') }}"  autofocus>--}}
-                                    {{--<--}}
-                                {{--@if ($errors->has('amfi_file'))--}}
-                                    {{--<span class="invalid-feedback" role="alert">--}}
-                                        {{--<strong>{{ $errors->first('amfi_file') }}</strong>--}}
-                                    {{--</span>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label radio" style="padding-left : 162px;">{{ __('IRDA No.') }}</label>
@@ -790,34 +777,54 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('If Yes Then Please Give ARN No.(Attach Photocopy)') }}</label>
 
-                        {{--<div class="form-group row">--}}
-                            {{--<label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Photo') }}</label>--}}
+                            <div class="col-md-6">
+                                <input id="amfi_file" type="file" class="{{ $errors->has('amfi_file') ? ' is-invalid' : '' }}" name="filename" value="{{ old('amfi_file') }}"  autofocus>
+                                <div class="input-group-btn">
+                                    <button id = "amfi" class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>upload</button>
+                                </div>
 
-                            {{--<div class="col-md-6">--}}
-                                {{--<input id="photo" type="file" class="{{ $errors->has('photo') ? ' is-invalid' : '' }}" name="photo" value="{{ old('photo') }}"  autofocus>--}}
+                                @if ($errors->has('amfi_file'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('amfi_file') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
-                                {{--@if ($errors->has('photo'))--}}
-                                    {{--<span class="invalid-feedback" role="alert">--}}
-                                        {{--<strong>{{ $errors->first('photo') }}</strong>--}}
-                                    {{--</span>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Photo') }}</label>
 
-                        {{--<div class="form-group row">--}}
-                            {{--<label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Signature') }}</label>--}}
+                            <div class="col-md-6">
+                                <input id="photo" type="file" class="{{ $errors->has('photo') ? ' is-invalid' : '' }}" name="photo" value="{{ old('photo') }}"  autofocus>
+                                <div class="input-group-btn">
+                                    <button  id="photo1" class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>upload</button>
+                                </div>
+                                @if ($errors->has('photo'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('photo') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
-                            {{--<div class="col-md-6">--}}
-                                {{--<input id="sign" type="file" class="{{ $errors->has('sign') ? ' is-invalid' : '' }}" name="sign" value="{{ old('sign') }}"  autofocus>--}}
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Signature') }}</label>
 
-                                {{--@if ($errors->has('sign'))--}}
-                                    {{--<span class="invalid-feedback" role="alert">--}}
-                                        {{--<strong>{{ $errors->first('sign') }}</strong>--}}
-                                    {{--</span>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+                            <div class="col-md-6">
+                                <input id="sign" type="file" class="{{ $errors->has('sign') ? ' is-invalid' : '' }}" name="sign" value="{{ old('sign') }}"  autofocus>
+                                <div class="input-group-btn">
+                                    <button id="sign1" class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>upload</button>
+                                </div>
+                                @if ($errors->has('sign'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('sign') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
 
                         <div class="form-group row mb-0">
@@ -859,6 +866,21 @@
             $("#presenttown").val(permanentTownName);
             $("#presentstate").val(permanentStateName);
             $("#presentpin").val(permanentPin);
+        });
+
+        $("#amfi").click(function(){
+            var html = $(".clone").html();
+            $(".increment").after(html);
+        });
+
+        $("#photo1").click(function(){
+            var html = $(".clone").html();
+            $(".increment").after(html);
+        });
+
+        $("#sign1").click(function(){
+            var html = $(".clone").html();
+            $(".increment").after(html);
         });
     });
 
