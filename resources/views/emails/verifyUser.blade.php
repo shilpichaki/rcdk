@@ -2,6 +2,11 @@
 <html>
   <head>
     <title>Welcome Letter</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
   </head>
   <body>
     <nav class="navbar">
@@ -13,12 +18,14 @@
           <div class="col-md-4">
             <img src="{{ asset('images/logo.jpg') }}">
           </div>
-          <div class="col-md-4"></div>
-          <div class="col-md-4">
-            <ul>
-              <li><span class="glyphicon glyphicon-phone-alt"></span> : 9836513953</li>
-              <li><span class="glyphicon glyphicon-envelope"></span> : info@rcdkadvisory.com</li>
-            </ul>
+
+          <div class="col-md-8">
+            <p style="float: right;  margin-right: 50px;"><img src="{{ asset('images/phone.png') }}"> : 9836513953</p><br>
+            <p style="float: right;"><img src="{{ asset('images/envelope.png') }}"> : info@rcdkadvisory.com</p>
+            {{--<ul>--}}
+              {{--<li style="float: right; list-style: none;"><i class="glyphicon glyphicon-phone-alt"></i> : 9836513953</li>--}}
+              {{--<li style="float: right; list-style: none;"><i class="glyphicon glyphicon-envelope"></i> : info@rcdkadvisory.com</li>--}}
+            {{--</ul>--}}
           </div>
         </div>
       </div>
@@ -30,7 +37,7 @@
         <h5>{{$subbroker->address->present_town}}</h5>
       </div>
       <div class="col-md-6" style="text-align: right;">
-        Date : {{ Carbon\Carbon::parse($subbroker->created_at)->format('d-m-Y i') }}
+        Date : {{ Carbon\Carbon::parse($subbroker->created_at)->format('d-m-Y') }}
       </div>
     </div>
     <br/>
@@ -45,13 +52,13 @@
       <span style="background-color: #ffe924;">You can have access to: </span>
 
       <ul>
-      <li>	Reports on transactions </li>
-      <li>	Monthly Bills </li>
-      <li>	Clients Portfolio Reports </li>
-      <li>	Renewals Alerts</li>
-      <li>	Financial Assessment Tools  </li>
-      <li>	SMS Facility & many more… </li>
-      <li>	Training & Development </li>
+      <li>	Reports on transactions </li>
+      <li>	Monthly Bills </li>
+      <li>	Clients Portfolio Reports </li>
+      <li>	Renewals Alerts</li>
+      <li>	Financial Assessment Tools  </li>
+      <li>	SMS Facility & many more… </li>
+      <li>	Training & Development </li>
     </ul>
     </p>
     <p style="background-color: #ffe924;">Please note that your unique code is {{ $subbroker->userActivation->user_id }}. Kindly use this code for further interactions with us.</p>
@@ -66,8 +73,8 @@
     <br>
 
     <div class="container-fluid">
-      <div class="row" style="height: 10px; background-color: #28a745"></div>
-      <div class="row" style="height: 10px; background-color: #28a745"></div>
+      <div class="row" style="height: 8px; background-color: #28a745"></div><br>
+      <div class="row" style="height: 8px; background-color: #28a745"></div>
     </div>
   <h3 style="text-align: center;">RCDK Advisory Services Private Limited</h3>
 

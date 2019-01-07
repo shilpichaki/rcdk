@@ -14,7 +14,7 @@ class SubBroker extends Authenticatable
     public $primaryKey = "id";
     public $timestamps = true;
     protected $fillable = [
-        'name', 'identity', 'dob', 'age', 'phone_no', 'email', 'home_no', 'fax_no', 'password', 'education', 'proff_qualification', 'amfi_no', 'irda_no', 'other_qualification', 'occupation', 'exp_year',  'pan_no', 'aadhar_no',
+        'name', 'identity', 'introducer_name', 'introducer_code', 'dob', 'age', 'phone_no', 'email', 'home_no', 'fax_no', 'password', 'education', 'proff_qualification', 'amfi_no', 'irda_no', 'other_qualification', 'occupation', 'exp_year',  'pan_no', 'aadhar_no',
     ];
     protected $hidden = [
         'password'
@@ -30,10 +30,10 @@ class SubBroker extends Authenticatable
         return $this->hasOne('App\Address', 'sub_broker_id');
     }
 
-    public function introducer()
-    {
-        return $this->hasOne('App\Introducer', 'sub_broker_id');
-    }
+//    public function introducer()
+//    {
+//        return $this->hasOne('App\Introducer', 'sub_broker_id');
+//    }
 
     public function nominee()
     {
@@ -53,6 +53,11 @@ class SubBroker extends Authenticatable
     public function userActivation()
     {
         return $this->hasone('App\UserActivation', 'sub_broker_id');
+    }
+
+    public function policy()
+    {
+        return $this->hasone('App\Policy', 'sub_broker_id');
     }
 
 

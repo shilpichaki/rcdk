@@ -116,9 +116,12 @@ class RegisterController extends Controller
 //        ]);
         DB::beginTransaction();
 
+        //sub-broker details
         $subbroker = SubBroker::create([
             'name' => strtoupper($input['name']),
-            'identity' => $input['associatetype'] == 'yes' ? 1 : 0,
+            'identity' => $input['associatetype'] ,
+            'introducer_name' => $input['introducername'],
+            'introducer_code' => $input['introducercode'],
             'dob' => Util::mysqlDateTimeConverter($input['dob']),
             'age' => $input['age'],
             'phone_no' => $input['mobno'],
@@ -128,15 +131,16 @@ class RegisterController extends Controller
             'password' => bcrypt($input['password']),
             'education' => $input['qualification'],
             'proff_qualification' => $input['proffqualification'],
-            'amfi_no' => $input['amfino'] == 'yes' ? 1 : 0,
-            'irda_no' => $input['irdano'] == 'yes' ? 1 : 0,
+            'amfi_no' => $input['amfino'] ,
+            'irda_no' => $input['irdano'] ,
             'other_qualification' => $input['otherqualification'],
-            'occupation' => $input['occupation'] == 'yes' ? 1 : 0,
+            'occupation' => $input['occupation']  ,
             'exp_year' => $input['experience'],
             'pan_no' => $input['panno'],
             'aadhar_no' => $input['aadharno'],
         ]);
 
+        //bank-details
         BankMaster::create([
             'sub_broker_id' => $subbroker->id,
             'bank_name' => $input['bankname'],
@@ -146,15 +150,17 @@ class RegisterController extends Controller
             'ifsc' => $input['ifsc'],
             'micr' => $input['micr'],
             'branch_rtgs_no' => $input['rtgs'],
-            'acc_type' => $input['accounttype'] ? 1 : 0,
+            'acc_type' => $input['accounttype'] ,
         ]);
 
+        //nominee-details
         Nominee::create([
             'sub_broker_id' => $subbroker->id,
             'nominee_name' => $input['nomineename'],
             'nominee_relationship' => $input['nomineerelation'],
         ]);
 
+        //address-details
         Address::create([
             'sub_broker_id' => $subbroker->id,
             'permanent_street' => $input['permstreet'],
@@ -167,6 +173,7 @@ class RegisterController extends Controller
             'present_state_id' => $input['presentstate'],
         ]);
 
+        //Generate User-ID and save
         $string_name = strtoupper($input['name']);
         $string_town = strtoupper($input['presenttown']);
         $rand_no = mt_rand(100000, 999999);
@@ -186,30 +193,23 @@ class RegisterController extends Controller
         //$part2 = (!empty($username[1]))?substr($username[1], 0,5):"";
         $part4 = ($rand_no)?rand(0, $rand_no):"";
 
-        $username = $part1."/".$part2."/".$part3."/".$part4;
+        $username = $part1.$part2."/".$part3."/".$part4;
 
         UserActivation::create([
             'sub_broker_id' => $subbroker->id,
             'user_id' => $username,
             'token' => str_random('30'),
         ]);
-        \Mail::to($subbroker->email)->send(new VerifyMail($subbroker));
+        \Mail::to($subbroker->email)->send(new VerifyMail($subbroker)); //sending mail to the new sub-broker
 
-        Introducer::create([
-            'sub_broker_id' => $subbroker->id,
-            'introducer_name' => $input['introducername'],
-            'introducer_code' => $input['introducercode'],
-        ]);
 
+        //product-details
         Product::create([
             'sub_broker_id' => $subbroker->id,
             'product_name' => $input['product'],
         ]);
-//        if($input->hasFile('filename'))
-//        {
-//            $imageName = $input->filename->getClientOriginalName();
-//            $input->filename->move(public_path('upload'),$imageName);
-//        }
+
+        //file-upload
         $title = $input['filename'];
         $imageName = $title->getClientOriginalName();
         $title->move(public_path('upload'), $imageName);
@@ -226,7 +226,7 @@ class RegisterController extends Controller
             'sub_broker_id' => $subbroker->id,
             'amfi_file' => $title,
             'photo' => $nameOfPhoto,
-            'sign' => $nameOfSign,
+            'signature' => $nameOfSign,
         ]);
 
         DB::commit();

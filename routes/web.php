@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
+Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register')->middleware('auth');
 Route::post('register','Auth\RegisterController@register');
 Route::get('/subbroker/verify/{token}', 'Auth\RegisterController@verifyUser');
 
@@ -30,3 +30,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('image-view', 'ImageController@index');
 Route::post('image-submit', 'ImageController@store');
+
+Route::get('policy', 'PolicyController@index')->name('policy.index');
+Route::get('policy/create','PolicyController@create')->name('policy.create');
+Route::post('policy','PolicyController@store')->name('policy.store');
+Route::get('policy/edit/{id}', 'PolicyController@edit')->name('policy.edit');
+Route::put('policy/{id}', 'PolicyController@update')->name('policy.update');

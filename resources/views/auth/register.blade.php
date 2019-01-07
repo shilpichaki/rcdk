@@ -82,77 +82,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name" class="col-form-label text-md-right" style="padding-left: 190px;">{{ __('Permanent Address : ') }}</label>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('House No. / Street Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="permstreet" type="text" class="form-control{{ $errors->has('permstreet') ? ' is-invalid' : '' }}" name="permstreet" value="{{ old('permstreet') }}" required autofocus>
-
-                                @if ($errors->has('permstreet'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('permstreet') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('City/Town') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="permtown" type="text" class="form-control{{ $errors->has('permtown') ? ' is-invalid' : '' }}" name="permtown" value="{{ old('permtown') }}" required autofocus>
-
-                                @if ($errors->has('permtown'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('permtown') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="select" class="col-md-4 col-form-label text-md-right">{{ __('state') }}</label>
-
-                            <div class="col-md-6">
-                                <select id="permstate" name='permstate' class="form-control" autofocus>
-                                    <option value = "0">-Please Select One-</option>
-                                    @foreach ($states as $state)
-                                        <option value="{{ $state->id }}">{{ $state->state_name }}</option>
-                                    @endforeach
-                                </select>
-
-                                @if ($errors->has('permstate'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('permstate') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Pin') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="permpin" type="text" class="form-control{{ $errors->has('permpin') ? ' is-invalid' : '' }}" name="permpin" value="{{ old('permpin') }}" required autofocus>
-
-                                @if ($errors->has('permpin'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('permpin') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label for="name" class="col-form-label text-md-right" style="padding-left: 190px;">{{ __('Present Address : ') }}</label>
-                        </div>
-
-                        <div class="form-group row col-md-12">
-                            <label for=""><input id="address" type="checkbox"  name="address">Check This Box If The Permanent And Present Address are Same :</label>
-
                         </div>
 
                         <div class="form-group row">
@@ -216,7 +146,75 @@
                             </div>
                         </div>
 
+                        <div class="form-group row col-md-12">
+                            <label for=""><input id="address" type="checkbox"  name="address">Check This Box If The Present And Permanent Address are Same :</label>
 
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-form-label text-md-right" style="padding-left: 190px;">{{ __('Permanent Address : ') }}</label>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('House No. / Street Name') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="permstreet" type="text" class="form-control{{ $errors->has('permstreet') ? ' is-invalid' : '' }}" name="permstreet" value="{{ old('permstreet') }}" required autofocus>
+
+                                @if ($errors->has('permstreet'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('permstreet') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('City/Town') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="permtown" type="text" class="form-control{{ $errors->has('permtown') ? ' is-invalid' : '' }}" name="permtown" value="{{ old('permtown') }}" required autofocus>
+
+                                @if ($errors->has('permtown'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('permtown') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="select" class="col-md-4 col-form-label text-md-right">{{ __('state') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="permstate" name='permstate' class="form-control" autofocus>
+                                    <option value = "0">-Please Select One-</option>
+                                    @foreach ($states as $state)
+                                        <option value="{{ $state->id }}">{{ $state->state_name }}</option>
+                                    @endforeach
+                                </select>
+
+                                @if ($errors->has('permstate'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('permstate') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Pin') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="permpin" type="text" class="form-control{{ $errors->has('permpin') ? ' is-invalid' : '' }}" name="permpin" value="{{ old('permpin') }}" required autofocus>
+
+                                @if ($errors->has('permpin'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('permpin') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="name" class="col-form-label text-md-right" style="padding-left: 160px;">{{ __('Personal Details : ') }}</label>
@@ -782,9 +780,6 @@
 
                             <div class="col-md-6">
                                 <input id="amfi_file" type="file" class="{{ $errors->has('amfi_file') ? ' is-invalid' : '' }}" name="filename" value="{{ old('amfi_file') }}"  autofocus>
-                                <div class="input-group-btn">
-                                    <button id = "amfi" class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>upload</button>
-                                </div>
 
                                 @if ($errors->has('amfi_file'))
                                     <span class="invalid-feedback" role="alert">
@@ -799,9 +794,7 @@
 
                             <div class="col-md-6">
                                 <input id="photo" type="file" class="{{ $errors->has('photo') ? ' is-invalid' : '' }}" name="photo" value="{{ old('photo') }}"  autofocus>
-                                <div class="input-group-btn">
-                                    <button  id="photo1" class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>upload</button>
-                                </div>
+
                                 @if ($errors->has('photo'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('photo') }}</strong>
@@ -815,9 +808,6 @@
 
                             <div class="col-md-6">
                                 <input id="sign" type="file" class="{{ $errors->has('sign') ? ' is-invalid' : '' }}" name="sign" value="{{ old('sign') }}"  autofocus>
-                                <div class="input-group-btn">
-                                    <button id="sign1" class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>upload</button>
-                                </div>
                                 @if ($errors->has('sign'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('sign') }}</strong>
@@ -856,16 +846,16 @@
     $(document).ready(function (){
         $("#address").click(function(){
 //            alert("checked!!!");
-            var permenentStreetName = $("#permstreet").val();
-            var permanentTownName = $("#permtown").val();
-            var permanentStateName = $("#permstate").val();
-            var permanentPin = $("#permpin").val();
+            var presentStreetName = $("#presentstreet").val();
+            var presentTownName = $("#presenttown").val();
+            var presentStateName = $("#presentstate").val();
+            var presentPin = $("#presentpin").val();
             //console.log(permenentStreetName);
 
-            $("#presentstreet").val(permenentStreetName);
-            $("#presenttown").val(permanentTownName);
-            $("#presentstate").val(permanentStateName);
-            $("#presentpin").val(permanentPin);
+            $("#permstreet").val(presentStreetName);
+            $("#permtown").val(presentTownName);
+            $("#permstate").val(presentStateName);
+            $("#permpin").val(presentPin);
         });
 
         $("#amfi").click(function(){
