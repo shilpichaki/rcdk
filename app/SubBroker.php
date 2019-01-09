@@ -55,9 +55,9 @@ class SubBroker extends Authenticatable
         return $this->hasone('App\UserActivation', 'sub_broker_id');
     }
 
-    public function policy()
+    public function policies()
     {
-        return $this->hasone('App\Policy', 'sub_broker_id');
+        return $this->hasMany('App\Policy', 'sub_broker_id');
     }
 
 

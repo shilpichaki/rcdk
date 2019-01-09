@@ -27,6 +27,7 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('home1', 'HomeController@index')->name('home1');
 
 Route::get('image-view', 'ImageController@index');
 Route::post('image-submit', 'ImageController@store');

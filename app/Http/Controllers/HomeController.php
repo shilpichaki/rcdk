@@ -28,31 +28,34 @@ class HomeController extends Controller
     public function index()
     {
         $subBroker = SubBroker::findOrFail(Auth::user()->id);
+        $name = $subBroker->name;
+        $policy = $subBroker->policies;
+        // dd($policy);
         // dd($subBroker);
-        // if($subBroker->policy == null)
-        // {
-        // //     // dd($policyLists->sub_broker->name);
-        //     return view('home')->with('subBroker' , $subBroker);
-        // }
-        // else
-        // {
-        //     return view('home')->with('policyLists' , $subBroker->policy);
-        // }
-
-        if($subBroker->policy == null)
+        if($subBroker->policies == null)
         {
             
-            return redirect()->route('policy.create');
+            return view('home2')->with('subBroker' , $subBroker);
 
         }
         else
         {
-            // if()
-            return view('home')->with('subBroker' , $subBroker->policy);
+            $sub_brokers = SubBroker::with(['userActivation' , 'policies'])->where('introducer_code' , $subBroker->userActivation->user_id)->get();
+            // $joinee_policy = $sub_brokers->policies;
+            // dd($sub_brokers);
+            // return response()->json($joinee_policy);
+            // if($sub_brokers)
+            // {
+            //     return view('home')->with(['policy' => $policy , 'sub_brokers' => $sub_brokers , 'name' => $name]);
+            // }
+            // else
+            // {
+            //     return view('home')->with('subBroker' , $subBroker->policy);
+            // }
+            
         }
-        //dd($policyLists);
 
-        // return view('home', compact('policyLists'));
+        //return view('home');
         
     }
 }
