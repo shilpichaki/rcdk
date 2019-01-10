@@ -43,18 +43,18 @@
                                     <tbody>
                                     
                                         <!-- dd($policy); -->
-                                        <tr class="tell_index">
                                         @foreach($policy as $row)
+                                        <tr class="tell_index">
                                             <td align="center">{{ $name }}</td>
                                             <td align="center">{{ $row->policy_holder_name }}</td>
                                             <td align="center">{{ $row->category }}</td>
                                             <td align="center">{{ $row->product_name }}</td>
                                             <td align="center">{{ $row->policy_amount }}</td>
                                             <td align="center">{{ $row->issuing_status }}</td>
-                                        @endforeach
+                                        
                                             <!-- <td align="center"><a href="{{action('PolicyController@edit',$row['id'])}}" class="btn btn-success">Edit</a></td>  -->
                                         </tr>
-                                   
+                                        @endforeach
                                     </tbody>
                                     <!-- ///  Table  Data ///  -->
                                 </table>
@@ -85,17 +85,17 @@
                                     
                                         <!-- dd($policy); -->
                                         <tr class="tell_index">
-                                        @foreach($sub_brokers as $sub_broker)
+                                        
                                             <td align="center">{{ $sub_broker->name }}</td>
-                                            @foreach($policies as $policy)
+                                            @foreach($sub_broker->policies as $policy)
                                             <td align="center">{{ $policy->category }}</td>
                                             <td align="center">{{ $policy->policy_holder_name}}</td>
                                             <td align="center">{{ $policy->product_name }}</td>
                                             <td align="center">{{ $policy->policy_amount }}</td>
                                             <td align="center">{{ $policy->issuing_status }}</td>
                                             @endforeach
-                                        @endforeach    
-                                            <!-- <td align="center"><a href="{{action('PolicyController@edit',$subBroker['id'])}}" class="btn btn-success">Edit</a></td>  -->
+                                           
+                                            
                                         </tr>
                                    
                                     </tbody>

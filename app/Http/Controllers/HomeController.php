@@ -40,18 +40,19 @@ class HomeController extends Controller
         }
         else
         {
-            $sub_brokers = SubBroker::with(['userActivation' , 'policies'])->where('introducer_code' , $subBroker->userActivation->user_id)->get();
+            $sub_brokers = SubBroker::with(['userActivation' , 'policies'])->where('introducer_code' , $subBroker->userActivation->user_id)->first();
             // $joinee_policy = $sub_brokers->policies;
             // dd($sub_brokers);
+            // foreach()
             // return response()->json($joinee_policy);
-            // if($sub_brokers)
-            // {
-            //     return view('home')->with(['policy' => $policy , 'sub_brokers' => $sub_brokers , 'name' => $name]);
-            // }
-            // else
-            // {
-            //     return view('home')->with('subBroker' , $subBroker->policy);
-            // }
+            if($sub_brokers)
+            {
+                return view('home')->with(['policy' => $policy , 'sub_broker' => $sub_brokers , 'name' => $name]);
+            }
+            else
+            {
+                return view('home')->with('subBroker' , $subBroker->policy);
+            }
             
         }
 
